@@ -9,6 +9,7 @@ brew "youtube-dl"
 brew "imagemagick"
 brew "python"
 brew "java"
+brew "gh"
 
 # GUI Apps
 cask "iterm2"

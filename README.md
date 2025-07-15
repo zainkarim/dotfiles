@@ -6,8 +6,6 @@ Repository to bootstrap a new macOS setup with:
 - VSCode extensions
 - Homebrew CLI tools & GUI apps
 
----
-
 ## ⚙️ Structure
 
 dotfiles/
@@ -22,7 +20,6 @@ dotfiles/
 └── vscode/
 └── extensions.txt
 
----
 
 ## 🚀 Installation
 

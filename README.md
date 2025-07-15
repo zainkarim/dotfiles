@@ -6,21 +6,6 @@ Repository to bootstrap a new macOS setup with:
 - VSCode extensions
 - Homebrew CLI tools & GUI apps
 
-## ⚙️ Structure
-
-dotfiles/
-├── .p10k.zsh
-├── .zshrc
-├── Brewfile
-├── install.sh
-├── iterm2/
-│ ├── com.googlecode.iterm2.plist
-│ └── colors/
-│ └── ...your .sh theme files...
-└── vscode/
-└── extensions.txt
-
-
 ## 🚀 Installation
 
 ### 🧪 One-liner (recommended):

@@ -11,7 +11,7 @@ Repository to bootstrap a new macOS setup with:
 ### 🧪 One-liner (recommended):
 
 ```bash
-git clone https://github.com/yourusername/dotfiles.git ~/dotfiles && cd ~/dotfiles && chmod +x install.sh && ./install.sh
+git clone https://github.com/zainkarim/dotfiles.git ~/dotfiles && cd ~/dotfiles && chmod +x install.sh && ./install.sh
 ```
 
 ### 🧭 Manual steps:

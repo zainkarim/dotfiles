@@ -18,7 +18,7 @@ git clone https://github.com/yourusername/dotfiles.git ~/dotfiles && cd ~/dotfil
 
 ```bash
 # 1. Clone the repo
-git clone https://github.com/yourusername/dotfiles.git ~/dotfiles
+git clone https://github.com/zainkarim/dotfiles.git ~/dotfiles
 cd ~/dotfiles
 
 # 2. Make the installer executable (optional on some systems)

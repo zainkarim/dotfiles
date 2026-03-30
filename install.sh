@@ -1,5 +1,7 @@
 #!/bin/bash
 
+DOTFILES_DIR="$(cd "$(dirname "$0")" && pwd)"
+
 echo "🛠️  Setting up your new Mac..."
 
 # Install Homebrew if not installed
@@ -11,12 +13,12 @@ else
 fi
 
 echo "📦 Installing packages from Brewfile..."
-brew bundle --file=~/dotfiles/Brewfile
+brew bundle --file="$DOTFILES_DIR/Brewfile"
 
 # Install Oh My Zsh
 if [ ! -d "$HOME/.oh-my-zsh" ]; then
   echo "⚡ Installing Oh My Zsh..."
-  sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+  RUNZSH=no CHSH=no sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 else
   echo "✅ Oh My Zsh already installed"
 fi
@@ -42,27 +44,28 @@ PLUGINS_DIR="$ZSH_CUSTOM/plugins"
 
 # Symlink dotfiles
 echo "🔗 Symlinking config files..."
-ln -sf ~/dotfiles/.zshrc ~/.zshrc
-ln -sf ~/dotfiles/.p10k.zsh ~/.p10k.zsh
+ln -sf "$DOTFILES_DIR/.zshrc" ~/.zshrc
+ln -sf "$DOTFILES_DIR/.p10k.zsh" ~/.p10k.zsh
 
 # VSCode extensions
 if command -v code >/dev/null; then
   echo "🧩 Installing VSCode extensions..."
   while read extension; do
     code --install-extension "$extension" || echo "⚠️ Could not install: $extension"
-  done < ~/dotfiles/vscode/extensions.txt
+  done < "$DOTFILES_DIR/vscode/extensions.txt"
 
   echo "🛠️  Copying VSCode settings..."
   mkdir -p ~/Library/Application\ Support/Code/User
-  cp ~/dotfiles/vscode/settings.json ~/Library/Application\ Support/Code/User/settings.json
+  cp "$DOTFILES_DIR/vscode/settings.json" ~/Library/Application\ Support/Code/User/settings.json
 else
   echo "⚠️ VSCode not found — skipping extensions/settings"
 fi
 
 # Configure iTerm2 to load preferences from dotfiles
 echo "🔧 Configuring iTerm2 to use custom preferences..."
-defaults write com.googlecode.iterm2 PrefsCustomFolder -string "$HOME/dotfiles/iterm2"
+killall iTerm2 2>/dev/null || true
+defaults write com.googlecode.iterm2 PrefsCustomFolder -string "$DOTFILES_DIR/iterm2"
 defaults write com.googlecode.iterm2 LoadPrefsFromCustomFolder -bool true
 
-echo "✅ Setup complete! Restart your terminal to apply changes."
+echo "✅ Setup complete! Open a new terminal and relaunch iTerm2 to apply all changes."
 

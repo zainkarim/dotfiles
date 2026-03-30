@@ -13,7 +13,7 @@ else
 fi
 
 echo "📦 Installing packages from Brewfile..."
-brew bundle --file="$DOTFILES_DIR/Brewfile"
+brew bundle --no-upgrade --file="$DOTFILES_DIR/Brewfile"
 
 # Install Oh My Zsh
 if [ ! -d "$HOME/.oh-my-zsh" ]; then
@@ -56,14 +56,17 @@ if command -v code >/dev/null; then
 
   echo "🛠️  Copying VSCode settings..."
   mkdir -p ~/Library/Application\ Support/Code/User
-  cp "$DOTFILES_DIR/vscode/settings.json" ~/Library/Application\ Support/Code/User/settings.json
+  if [ -f "$DOTFILES_DIR/vscode/settings.json" ]; then
+    cp "$DOTFILES_DIR/vscode/settings.json" ~/Library/Application\ Support/Code/User/settings.json
+  else
+    echo "⚠️ vscode/settings.json not found — skipping"
+  fi
 else
   echo "⚠️ VSCode not found — skipping extensions/settings"
 fi
 
 # Configure iTerm2 to load preferences from dotfiles
 echo "🔧 Configuring iTerm2 to use custom preferences..."
-killall iTerm2 2>/dev/null || true
 defaults write com.googlecode.iterm2 PrefsCustomFolder -string "$DOTFILES_DIR/iterm2"
 defaults write com.googlecode.iterm2 LoadPrefsFromCustomFolder -bool true
 
